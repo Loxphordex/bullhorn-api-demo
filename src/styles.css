@@ -1,0 +1,31 @@
+.resume-info {
+    border: 1px solid rgb(188, 192, 202);
+    display: block;
+    width: 500px;
+    min-height: 200px;
+    margin:  2%auto;
+}
+
+.token-field {
+    outline: none;
+    border: none;
+    display: inline-block;
+}
+
+.token-field input,
+.token-field button {
+    display: block;
+    margin: 3%;
+}
+
+.token-field button {
+    background: none;
+    background-color: rgb(238, 240, 245);
+    border: 1px solid rgb(188, 192, 202);
+    padding: 2%;
+    cursor: pointer;
+}
+
+.token-field input {
+    border: none;
+}

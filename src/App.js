@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import AuthServices from './services/auth-services'
+import './styles.css'
 
 function App(props) {
 
@@ -15,7 +16,9 @@ function App(props) {
     const [error, handleError] = useState(null);
 
     // * Get Authorization Code
-    function handleGetAuthCode() {
+    function handleGetAuthCode(event) {
+        event.preventDefault()
+
         if (!clientId || !stateValue) return
         if (!redirectUrl) redirectUrl = ''
 
@@ -29,7 +32,9 @@ function App(props) {
 
     // * Use creds from Authorization Code to 
     // * get an Access Token
-    function handleGetAccessToken() {
+    function handleGetAccessToken(event) {
+        event.preventDefault()
+
         if (!clientId || !authCode || ! clientSecret) return
         if (!redirectUrl) redirectUrl = ''
 
@@ -38,7 +43,9 @@ function App(props) {
 
     // * After Access Token expires, use the 
     // * Refresh Token to get a new one
-    function handlePostRefreshToken() {
+    function handlePostRefreshToken(event) {
+        event.preventDefault()
+        
         if (!clientId || !clientSecret || !refreshToken) return
 
         AuthServices.postRefreshToken(clientId, clientSecret, refreshToken)
@@ -78,15 +85,15 @@ function App(props) {
 
     return (
         <div className='App'>
-            <div>
+            <div className='resume-info'>
                 <div>{ resumeInfo && formatResumeData() }</div>
             </div>
-            <fieldset>
+            <fieldset className='token-field'>
                 <form>
                     <input type='file' onChange={(event) => handleFileUpload(event)}></input>
-                    <button onClick={() => handleGetAuthCode()}>Get Authorization Code</button>
-                    <button onClick={() => handleGetAccessToken()}>Get Access Token</button>
-                    <button onClick={() => handlePostRefreshToken()}>Post Refresh Token</button>
+                    <button onClick={(event) => handleGetAuthCode(event)}>Get Authorization Code</button>
+                    <button onClick={(event) => handleGetAccessToken(event)}>Get Access Token</button>
+                    <button onClick={(event) => handlePostRefreshToken(event)}>Post Refresh Token</button>
                 </form>
             </fieldset>
         </div>
